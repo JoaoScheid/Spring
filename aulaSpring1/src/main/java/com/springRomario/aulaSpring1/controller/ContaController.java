@@ -37,6 +37,17 @@ public class ContaController {
         return contaList.stream().map(Conta::convertToContaResponseDTO).toList();
     }
 
+    @GetMapping("/filtro")
+    public List<ContaResponseDTO> buscarPorFiltro(@RequestParam String titular, @RequestParam Integer numero) {
+        List<Conta> contasList =service.buscarContasFiltro(titular, numero);
+        return contasList.stream().map(Conta::convertToContaResponseDTO).toList();
+    }
+
+    @GetMapping("/saldo")
+    public List<ContaResponseDTO> buscarPorSaldo(@RequestParam Double saldo) {
+        return service.buscarContasPorSaldo(saldo).stream().map(Conta::convertToContaResponseDTO).toList();
+    }
+
     @GetMapping("/page")
     public Page<ContaResponseDTO> buscarTodasAsContasPaginado(@PageableDefault(size = 20,//Numero de elemento
             sort = "saldo", //Por ordem de saldo

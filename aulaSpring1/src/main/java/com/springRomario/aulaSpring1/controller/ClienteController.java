@@ -53,6 +53,11 @@ public class ClienteController {
         return cliente.convertToClientResponseDTO();
     }
 
+    @GetMapping("/nome")
+    public ClienteResponseDTO buscarPorNome(@RequestParam String nome){
+       return service.buscarPorNome(nome).convertToClientResponseDTO();
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Page<ClienteResponseDTO> buscarClientes(@PageableDefault(size = 20, sort = "nome", direction = Sort.Direction.ASC, page = 0) Pageable pageable){

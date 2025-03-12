@@ -26,7 +26,7 @@ import java.util.NoSuchElementException;
 @AllArgsConstructor
 public class ClienteService {
 
-    private final ClienteRepository repository;
+    private final ClienteRepository    repository;
     private ContaService contaService;
     private final ModelMapper modelMapper;
 
@@ -42,6 +42,7 @@ public class ClienteService {
             modelMapper.map(clienteEditado, clienteAtual);
             return repository.save(clienteAtual);
         }
+        //repository.findByNomeOrderByCpf(clienteDTO.nome());
         throw new NoSuchElementException();
     }
 
@@ -69,6 +70,9 @@ public class ClienteService {
         repository.deleteById(id);
     }
 
+    public Cliente buscarPorNome(String nome) {
+        return repository.findByNome(nome);
+    }
 
     public Page<Cliente> buscarConta(Pageable pageable) {
         return repository.findAll(pageable);

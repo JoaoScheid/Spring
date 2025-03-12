@@ -39,6 +39,13 @@ public class ContaService {
         return repository.findAll(pageable);
     }
 
+    public List<Conta> buscarContasFiltro(String nomeTitular, Integer numero) {
+        return repository.findByTitular_NomeContainsOrNumeroOrderByNumero(nomeTitular, numero);
+    }
+
+    public List<Conta> buscarContasPorSaldo(Double saldo) {
+        return repository.findBySaldoGreaterThan(saldo);
+    }
     public Conta buscarConta(Integer id) {
         return repository.findById(id).get();
     }
